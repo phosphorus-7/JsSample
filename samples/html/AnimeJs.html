@@ -1,0 +1,63 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.2/anime.min.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        anime({
+          targets: '#target',
+          scale: [1, 1.2],
+          loop: true,
+          direction: 'alternate',
+          easing: 'easeInOutSine',
+          duration: 800,
+          update: function(anim) {
+            const progress = anim.progress / 100;
+            const color = `hsl(0, 100%, ${60 - progress * 10}%)`;
+            document.querySelector("#target").style.setProperty("--heart-color", color);
+          }
+        });
+      });
+    </script>
+    <style>
+      #container {
+        padding: 5rem;
+      }
+
+      #target {
+        --heart-color: red;
+        width: 100px;
+        height: 100px;
+        background-color: var(--heart-color);
+        position: relative;
+        display: flex;
+        border-radius: 50%;
+      }
+
+      #target::before,
+      #target::after {
+        content: "";
+        width: 100px;
+        height: 100px;
+        background-color: var(--heart-color);
+        position: absolute;
+        border-radius: 50%;
+      }
+
+      #target::before {
+        top: -50px;
+        left: 0;
+      }
+
+      #target::after {
+        left: 50px;
+        top: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <div id="target"></div>
+    </div>
+  </body>
+</html>
